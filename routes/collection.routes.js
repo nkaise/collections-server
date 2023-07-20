@@ -4,24 +4,50 @@ const Themes = require("../models/Themes");
 const router = new Router();
 const authMiddleware = require('../middleware/auth.middleware');
 const { populate } = require("mongoose");
+const Items = require('../models/Items');
 
 router.post('/createcollection', authMiddleware, async (req, res) => {
     try {
-        const { name, description, theme, userId, additionalFields } = req.body;
+        const { name, description, theme, userId, additionalFieldsArray } = req.body;
         const collection = new Collection({
             name: name,
             description: description,
-            // theme: theme,
-            theme: { _id: theme, name: "" },
+            theme: theme,
             userId: userId,
-            additionalFieldSchema: additionalFields
+            additionalFields: additionalFieldsArray
         });
         await collection.save();
-        const populatedCollection = await Collection.findById(collection._id).populate('theme');
+        // const populatedCollection = await Collection.findById(collection._id).populate('theme');
         res.json({message: 'Collection has been successfully created'});
     } catch (e) {
         console.log(e);
         res.status(500).json({message: 'Server error'})
+    }
+});
+
+router.post('/createitem', authMiddleware, async (req, res) => {
+    try {
+        const { name, tags, collectionId } = req.body;
+        const collection = new Items({
+            name: name,
+            tags: tags,
+            collectionId: collectionId,
+        });
+        await collection.save();
+        res.json({message: 'Item has been successfully created'});
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({message: 'Server error'})
+    }
+});
+
+router.get('/items', authMiddleware, async (req, res) => {
+    try {
+        const items = await Items.find({}, 'name tags');
+        res.json({ items });
+    } catch (e) {
+        console.log(e);
+        res.send({message: "Server error"});
     }
 });
 

@@ -27,22 +27,7 @@ const start = async () => {
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}`)
         });
-
-        // const existingThemes = await Themes.findOne({ name: { $exists: true } });
-
-        // if (!existingThemes) {
-        //   try {
-        //     const defaultThemes = new Themes({
-        //       name: ["Books", "Wines", "Cards", "Toys", "Coins", "Shoes", "Pictures"]
-        //     });
-        //     await defaultThemes.save();
-        //     console.log('Документы "Themes" успешно сохранены');
-        //   } catch (error) {
-        //     console.error('Ошибка при сохранении документов "Themes"', error);
-        //   }
-        // } else {
-        //   console.log('Поле "name" уже существует в таблице "themes"');
-        // }
+        
         const themesCount = await Themes.countDocuments();
 
         if (themesCount === 0) {
