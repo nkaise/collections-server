@@ -1,0 +1,4 @@
+include:
+  - project: 'nkaise-projects/deploy'
+    ref: 'dev'
+    file: 'ci/.gitlab-ci.collections-server.yml'

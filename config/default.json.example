@@ -1,0 +1,6 @@
+{
+    "serverPort": ${SERVER_PORT},
+    "dbUrl": "${DB_URL}",
+    "secretKey": "${SECRET_KEY}",
+    "PASSWORD": "${PASSWORD}"
+}

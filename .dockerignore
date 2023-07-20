@@ -1,0 +1,6 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+config/default.json
+node_modules
