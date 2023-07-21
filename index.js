@@ -39,7 +39,6 @@ const start = async () => {
             { name: "Coins" },
             { name: "Pictures" },
             { name: "Toys" },
-            // Добавьте другие темы
           ];
         
           const createdThemes = await Themes.insertMany(themesData);

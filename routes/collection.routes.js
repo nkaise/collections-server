@@ -41,9 +41,9 @@ router.post('/createitem', authMiddleware, async (req, res) => {
     }
 });
 
-router.get('/items', authMiddleware, async (req, res) => {
+router.get('/items', async (req, res) => {
     try {
-        const items = await Items.find({}, 'name tags');
+        const items = await Items.find({}, 'name tags collectionId');
         res.json({ items });
     } catch (e) {
         console.log(e);
@@ -61,9 +61,9 @@ router.get('/themes', authMiddleware, async (req, res) => {
     }
 });
 
-router.get('/getcollections', authMiddleware, async (req, res) => {
+router.get('/getcollections', async (req, res) => {
     try {
-      const collections = await Collection.find({}, 'name description theme');
+      const collections = await Collection.find({}, 'name description theme userId');
       res.json({ collections });
     } catch (e) {
       console.log(e);
