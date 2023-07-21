@@ -29,11 +29,9 @@ router.put('/users/:id', authMiddleware, async (req, res) => {
       const userId = req.params.id;
       const { status, role } = req.body;
       const user = await Users.findById(userId);
-  
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-  
       if (status) {
         user.status = status;
         await user.save();
@@ -49,6 +47,6 @@ router.put('/users/:id', authMiddleware, async (req, res) => {
       console.log(e);
       res.send({ message: "Server error" });
     }
-  });
+});
 
 module.exports = router

@@ -17,7 +17,6 @@ router.post('/createcollection', authMiddleware, async (req, res) => {
             additionalFields: additionalFieldsArray
         });
         await collection.save();
-        // const populatedCollection = await Collection.findById(collection._id).populate('theme');
         res.json({message: 'Collection has been successfully created'});
     } catch (e) {
         console.log(e);
@@ -69,6 +68,6 @@ router.get('/getcollections', async (req, res) => {
       console.log(e);
       res.send({ message: "Server error" });
     }
-  });
+});
 
 module.exports = router
